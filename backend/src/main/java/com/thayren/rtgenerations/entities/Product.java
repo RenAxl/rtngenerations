@@ -2,12 +2,20 @@ package com.thayren.rtgenerations.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +36,18 @@ public class Product implements Serializable {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant date;
 	
+	@ManyToMany
+	@JoinTable(
+			name = "tb_product_category",
+			joinColumns = @JoinColumn(name = "product_id"),
+			inverseJoinColumns =  @JoinColumn(name = "category_id"))
+	Set<Category> categories = new HashSet<>();
+	
+	/* O id.product é porque na classe OrderItem é necessário acessar o atributo id que é do tipo OrderItemPK, 
+	 onde neste ultimo, acessamos o atributo product*/
+	@OneToMany(mappedBy="id.product")
+	private Set<OrderItem> itens = new HashSet<>();
+	
 	public Product() {
 	}
 
@@ -38,6 +58,14 @@ public class Product implements Serializable {
 		this.price = price;
 		this.imgUrl = imgUrl;
 		this.date = date;
+	}
+	
+	public List<Order> getOrders() {
+		List<Order> list = new ArrayList<>();
+		for (OrderItem x : itens) {
+			list.add(x.getOrder());
+		}
+		return list;
 	}
 
 	public Long getId() {
@@ -88,6 +116,14 @@ public class Product implements Serializable {
 		this.date = date;
 	}
 	
+	public Set<Category> getCategories() {
+		return categories;
+	}
+	
+	public Set<OrderItem> getItens() {
+		return itens;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -1,11 +1,14 @@
 package com.thayren.rtgenerations.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,9 @@ public class State implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	
+	@OneToMany(mappedBy="state")
+	private List<City> cities = new ArrayList<>();
 
 	public State() {
 	}
@@ -40,6 +46,12 @@ public class State implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	
+
+	public List<City> getCities() {
+		return cities;
 	}
 
 	@Override

@@ -3,27 +3,36 @@ package com.thayren.rtgenerations.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_payment")
+@Inheritance(strategy=InheritanceType.JOINED) // Esta anotação é devido a esta classe possuir filhos
 public class Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private StatePayment state;
+	
+	@OneToOne
+	@JoinColumn(name="order_id")
+	@MapsId// Relacionamento 1-1, o id dele vai ser o mesmo do id de Order, ou seja, é o id que vai estar no campo order_id
+	private Order order;
 
 	public Payment() {
 	}
 
-	public Payment(Long id, StatePayment state) {
+	public Payment(Long id, StatePayment state, Order order) {
 		this.id = id;
 		this.state = state;
+		this.order = order;
 	}
 
 	public Long getId() {
@@ -40,6 +49,14 @@ public class Payment implements Serializable {
 
 	public void setState(StatePayment state) {
 		this.state = state;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	@Override
@@ -66,5 +83,8 @@ public class Payment implements Serializable {
 			return false;
 		return true;
 	}
+
+	
+	
 
 }

@@ -1,29 +1,31 @@
 package com.thayren.rtgenerations.entities;
 
 import javax.persistence.Entity;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import javax.persistence.Table;
 
 @Entity
-@JsonTypeName("pixPayment")
+@Table(name = "tb_pix_payment")
 public class PixPayment extends Payment {
 	private static final long serialVersionUID = 1L;
 
-	private Integer pixNumber;
+	private String pixNumber;
 
 	public PixPayment() {
 	}
 
-	public PixPayment(Integer pixNumber) {
+	public PixPayment(Long id, StatePayment state, Order order, String pixNumber) {
+		super(id, state, order);
 		this.pixNumber = pixNumber;
 	}
 
-	public Integer getPixNumber() {
+	public String getPixNumber() {
 		return pixNumber;
 	}
 
-	public void setPixNumber(Integer pixNumber) {
+	public void setPixNumber(String pixNumber) {
 		this.pixNumber = pixNumber;
 	}
+	
+	
 	
 }

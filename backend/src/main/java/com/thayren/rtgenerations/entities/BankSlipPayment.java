@@ -3,11 +3,10 @@ package com.thayren.rtgenerations.entities;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import javax.persistence.Table;
 
 @Entity
-@JsonTypeName("bankSlipPayment")
+@Table(name = "tb_bank_slip_payment")
 public class BankSlipPayment extends Payment {
 	private static final long serialVersionUID = 1L;
 
@@ -17,7 +16,8 @@ public class BankSlipPayment extends Payment {
 	public BankSlipPayment() {
 	}
 
-	public BankSlipPayment(LocalDate dueDate, LocalDate datePayment) {
+	public BankSlipPayment(Long id, StatePayment state, Order order, LocalDate dueDate, LocalDate datePayment) {
+		super(id, state, order);
 		this.dueDate = dueDate;
 		this.datePayment = datePayment;
 	}
@@ -37,5 +37,7 @@ public class BankSlipPayment extends Payment {
 	public void setDatePayment(LocalDate datePayment) {
 		this.datePayment = datePayment;
 	}
+
+	
 	
 }

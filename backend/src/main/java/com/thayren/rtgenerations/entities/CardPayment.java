@@ -1,11 +1,10 @@
 package com.thayren.rtgenerations.entities;
 
 import javax.persistence.Entity;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import javax.persistence.Table;
 
 @Entity
-@JsonTypeName("cardPayment")
+@Table(name = "tb_card_payment")
 public class CardPayment extends Payment {
 	private static final long serialVersionUID = 1L;
 
@@ -14,7 +13,8 @@ public class CardPayment extends Payment {
 	public CardPayment() {
 	}
 
-	public CardPayment(Integer numberOfInstallments) {
+	public CardPayment(Long id, StatePayment state, Order order, Integer numberOfInstallments) {
+		super(id, state, order);
 		this.numberOfInstallments = numberOfInstallments;
 	}
 
@@ -24,6 +24,5 @@ public class CardPayment extends Payment {
 
 	public void setNumberOfInstallments(Integer numberOfInstallments) {
 		this.numberOfInstallments = numberOfInstallments;
-	}
-	
+	}	
 }
