@@ -3,6 +3,8 @@ package com.thayren.rtgenerations.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -19,6 +21,8 @@ public class Payment implements Serializable {
 
 	@Id
 	private Long id;
+	
+	@Enumerated(EnumType.STRING)
 	private StatePayment state;
 	
 	@OneToOne
