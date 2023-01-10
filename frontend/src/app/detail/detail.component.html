@@ -1,1 +1,47 @@
-<p>Detalhamento do produto</p>
+<div class="product-details-container">
+  <div class="product-details-card">
+    <div class="title">
+      <h1>Nome do Produto</h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="img-container">
+          <div class="img-container-top">
+            <img src="assets/images/play5.png" alt="playstation 5" />
+          </div>
+          <div class="img-container-bottom">
+            <p>
+              Descrição do produto Descrição do produto Descrição do produto
+              Descrição do produto Descrição do produto Descrição do produto
+              Descrição do produto Descrição do produto Descrição do produto
+              Descrição do produto
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="price-discount-container">
+          <div class="price-discount-container-top">
+            <h1><span>R$: </span> {{ price | number : "1.2-2" }}</h1>
+          </div>
+          <div class="price-discount-container-bottom">
+            <h1>Descontos a vista</h1>
+            <h2><span>Pix: </span>20%</h2>
+            <h2><span>Boleto: </span>15%</h2>
+          </div>
+        </div>
+        <div class="details-buttons-container">
+            <button
+              class="btn btn-outline-danger detail-button"
+            >
+              Retornar aos Produtos
+            </button>
+            <button class="btn btn-primary detail-button text-white">
+              Adicionar ao carrinho
+            </button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
