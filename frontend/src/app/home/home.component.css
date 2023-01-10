@@ -1,0 +1,24 @@
+.products-container {
+    font-size: 18px;
+  }
+
+  .products-container a {
+    text-decoration: none;
+  }
+    
+  .products-title-container h1 {
+    font-size: 1em;
+    letter-spacing: -0.015em;
+    color: #263238;
+  }
+  
+  @media (min-width: 576px) {
+    .products-container {
+      font-size: 30px;
+    }
+  
+    .products-filter {
+      margin-left: -20px;
+    }
+  }
+  
